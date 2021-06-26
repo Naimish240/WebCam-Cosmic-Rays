@@ -25,6 +25,7 @@ def start(seconds=10):
             # Get Camera Input
             ret, frame = cap.read()
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            frame = frame[120:, :480]
             frames += 1
             # Get actual input after subtraction
             temp = frame - calibration_frame - tres_matrix

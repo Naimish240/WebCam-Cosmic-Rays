@@ -32,7 +32,10 @@ def calibrate(seconds=60):
     # Release capture
     cap.release()
 
-    return reference
+    # Crop reference image to 360x480, using only usable pixels
+    crop = reference[120:, :480]
+
+    return reference, crop
 
 
 def setThreshold(ref):
@@ -41,13 +44,16 @@ def setThreshold(ref):
     return tres
 
 
-def plot(ref):
+def plot(ref, crop):
     img = ref / 255.0
     plt.imshow(img, cmap='gray')
-    plt.savefig('calibration_map.png')
+    plt.savefig('calibration_map_full.png')
+    img = crop / 255.0
+    plt.imshow(img, cmap='gray')
+    plt.savefig('calibration_map_crop.png')
 
 
 if __name__ == '__main__':
-    foo = calibrate(10)
+    foo, too = calibrate(10)
     # print(setThreshold(foo))
-    plot(foo)
+    plot(foo, too)
