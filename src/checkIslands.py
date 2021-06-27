@@ -1,4 +1,5 @@
 def preprocess():
+    # Set to 0/1 pixels for island calculations
     pass
 
 
