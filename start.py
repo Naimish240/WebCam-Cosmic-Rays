@@ -1,5 +1,6 @@
-from cosmic.run import start
+from cosmic.run import start, setup
 
+setup()
 print('''
 ------------------------------------------------
 ╭━━┳━━┳━━┳╮╭┳┳━━╮

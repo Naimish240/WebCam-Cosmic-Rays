@@ -6,6 +6,8 @@ def preprocess(arr):
     b = arr > 0
     b = b.astype(int)
 
+    return b
+
 
 def dfs(arr, x, y, area=False):
     h, w = arr.shape
@@ -46,7 +48,7 @@ def calculate(image):
     islands, areas = calc(binaryImage)
     # box = boxes(image)
 
-    return islands, areas
+    return islands, areas, binaryImage
 
 
 if __name__ == '__main__':
