@@ -14,7 +14,9 @@ def dfs(arr, x, y, area=False):
     num = 1
 
     for row, col in adjacent:
-        if row in range(h) and col in range(w) and arr[row][col] == 1:
+        valid_row = row >= 0 and row < h
+        valid_col = col >= 0 and col < w
+        if valid_col and valid_row and arr[row][col] == 1:
             num += dfs(arr, row, col)
 
     return num

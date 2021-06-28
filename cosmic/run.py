@@ -1,5 +1,5 @@
-from calibration import calibrate, setThreshold
-from checkIslands import calculate
+from .calibration import calibrate, setThreshold
+from .checkIslands import calculate
 import numpy as np
 import matplotlib.pyplot as plt
 import cv2
@@ -18,10 +18,9 @@ def setup():
 
 
 def start(seconds=10, duration=60):
-    start_time = time.time()
-
     reference, calibration_crop = calibrate(seconds)
     print("Calibration sequence completed")
+    print('------------------------------------------')
 
     min_value = setThreshold(calibration_crop)
     tres_matrix = np.ones((480, 640)) * min_value
@@ -29,6 +28,8 @@ def start(seconds=10, duration=60):
     # Connect camera
     cap = cv2.VideoCapture(2)
 
+    print("Starting collecting readings")
+    start_time = time.time()
     # Get readings
     while (time.time() - start_time > duration):
         try:

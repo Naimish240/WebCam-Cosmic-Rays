@@ -7,10 +7,12 @@ import matplotlib.pyplot as plt
 def calibrate(seconds=60):
     # Connect camera
     cap = cv2.VideoCapture(2)
+
     width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     print("Camera Connected")
     print("Image Dimensions: ", width, 'x', height)
+    print('------------------------------------------')
 
     # Initialise vars
     frames = 0
