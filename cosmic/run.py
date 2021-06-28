@@ -50,11 +50,11 @@ def start(seconds=10, duration=60):
             temp = np.clip(temp, 0, 255)
 
             # Check for islands on subtracted frame
-            islands, maxArea, bmp = calculate(temp)
+            islands, areas, bmp = calculate(temp)
 
             # Add entry in db if island exists and > 5 pixels
-            if maxArea > 5:
-                post(islands, maxArea, t, frame, temp, min_value, bmp)
+            if areas and max(areas) > 5:
+                post(islands, areas, t, frame, temp, min_value, bmp)
 
         except KeyboardInterrupt:
             # Release capture
@@ -84,6 +84,7 @@ def post(islands, area, t, raw, processed, min_value, bmp):
     data = {
         'time': t,
         'area': area,
+        'max_area': max(area),
         'islands': islands,
         'threshold': min_value,
         'frame': 'images/raw_frame/{}.png'.format(t),
