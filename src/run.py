@@ -3,9 +3,9 @@ from checkIslands import calculate
 import numpy as np
 import matplotlib.pyplot as plt
 import cv2
-import requests
 import os
 import time
+from tinydb import TinyDB
 
 
 def setup():
@@ -15,56 +15,68 @@ def setup():
         os.mkdir('images/raw_frame')
     if not os.path.exists('images/processed_frame'):
         os.mkdir('images/processed_frame')
-    if not os.path.exists('images/boxed_frame'):
-        os.mkdir('images/boxed_frame')
 
 
-def start(user, seconds=10):
+def start(seconds=10, duration=60):
+    start_time = time.time()
+
     reference, calibration_crop = calibrate(seconds)
     print("Calibration sequence completed")
-    min_value = setThreshold(calibration_frame)
+
+    min_value = setThreshold(calibration_crop)
     tres_matrix = np.ones((480, 640)) * min_value
+
     # Connect camera
     cap = cv2.VideoCapture(2)
-    frames = 0
 
     # Get readings
-    while True:
+    while (time.time() - start_time > duration):
         try:
             # Get Camera Input
             ret, frame = cap.read()
             t = time.time()
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
             # Crop to usable part
             crop = frame[120:, :480]
-            frames += 1
+
             # Get actual input after subtraction
             temp = crop - calibration_crop - tres_matrix
             temp = np.clip(temp, 0)
+
             # Check for islands on subtracted frame
-            islands, area, boxed_frame = calculate(temp)
+            islands, maxArea = calculate(temp)
+
             # Add entry in db if island exists
             if islands:
-                post(islands, area, t, frame, temp, boxed_frame, user)
+                post(islands, maxArea, t, frame, temp, min_value)
+
         except KeyboardInterrupt:
             # Release capture
             cap.release()
 
 
-def save(frame, temp, boxed_frame, t):
-    img = frame / 255.0
+def save(raw, processed, t):
+    img = raw / 255.0
     plt.imshow(img, cmap='gray')
     plt.savefig('images/raw_frame/{}.png'.format(t))
-    img = temp / 255.0
+    img = processed / 255.0
     plt.imshow(img, cmap='gray')
     plt.savefig('images/processed_frame/{}.png'.format(t))
-    img = boxed_frame / 255.0
-    plt.imshow(img, cmap='gray')
-    plt.savefig('images/boxed_frame/{}.png'.format(t))
 
 
-def post(islands, area, t, frame, temp, boxed_frame, user):
-    save(frame, temp, boxed_frame, t)
+def post(islands, area, t, raw, processed, min_value):
+    save(raw, processed, t)
+    db = TinyDB('../db.json')
+    data = {
+        'time': t,
+        'area': area,
+        'islands': islands,
+        'threshold': min_value,
+        'frame': 'images/raw_frame/{}.png'.format(t),
+        'processed': 'images/processed_frame/{}.png'.format(t)
+    }
+    db.insert(data)
 
 
 if __name__ == '__main__':

@@ -1,26 +1,60 @@
-def preprocess():
+import numpy as np
+
+
+def preprocess(arr):
     # Set to 0/1 pixels for island calculations
-    pass
+    b = arr > 0
+    b = b.astype(int)
 
 
-def calcIslands():
-    # https://www.youtube.com/watch?v=__98uL6wst8
-    pass
+def dfs(arr, x, y, area=False):
+    h, w = arr.shape
+    arr[x][y] = 0
+    adjacent = [(x-1, y), (x+1, y), (x, y-1), (x, y+1)]
+    num = 1
+
+    for row, col in adjacent:
+        if row in range(h) and col in range(w) and arr[row][col] == 1:
+            num += dfs(arr, row, col)
+
+    return num
 
 
-def calcMaxArea():
-    # https://www.youtube.com/watch?v=jbeRlfKxo60
-    pass
+def calc(arr):
+    # Builds on Island problem
+    x, y = arr.shape
+    islands = 0
+    areas = []
+
+    for i in range(x):
+        for j in range(y):
+            if arr[i][j] == 1:
+                areas.append(dfs(arr, i, j))
+                islands += 1
+    return islands, areas
 
 
-def boxes():
+def boxes(arr):
     # https://docs.opencv.org/3.4/dd/d49/tutorial_py_contour_features.html
     pass
 
 
-def calculate(temp):
-    pass
+def calculate(image):
+    binaryImage = preprocess(image)
+    islands, areas = calc(binaryImage)
+    # box = boxes(image)
+
+    return islands, areas
 
 
 if __name__ == '__main__':
-    pass
+    arr = np.array([
+        [1, 1, 0, 0, 0],
+        [1, 1, 0, 0, 0],
+        [0, 0, 1, 0, 0],
+        [0, 0, 0, 1, 1]
+    ])
+
+    islands, area = calc(arr)
+    print("Islands : ", islands)
+    print("Area list: ", area)
