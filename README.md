@@ -17,9 +17,9 @@ Check your webcam's id to ensure the correct input device is being read. You mig
 - Tape
 ***Ensure the webcam is in complete darkness, and seal all holes light can leak through from with tape.***
 
-<img src = "https://github.com/Naimish240/WebCam-Cosmic-Rays/blob/main/Assets/1.jpg" width=40>
-<img src = "https://github.com/Naimish240/WebCam-Cosmic-Rays/blob/main/Assets/2.jpg" width=40>
-<img src = "https://github.com/Naimish240/WebCam-Cosmic-Rays/blob/main/Assets/3.jpg" width=40>
+<img src = "https://github.com/Naimish240/WebCam-Cosmic-Rays/blob/main/Assets/1.jpg" width=150>
+<img src = "https://github.com/Naimish240/WebCam-Cosmic-Rays/blob/main/Assets/2.jpg" width=150>
+<img src = "https://github.com/Naimish240/WebCam-Cosmic-Rays/blob/main/Assets/3.jpg" width=150>
 
 ## Principle
 When a cosmic ray enters the CMOS sensor the cosmic ray deposits a charge onto the sensor itself. If the sensor is not exposed to any sources of light, the cosmic ray will leave a track behind in the resulting image.
