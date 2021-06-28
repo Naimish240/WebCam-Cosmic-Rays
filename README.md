@@ -46,7 +46,7 @@ We store each positive frame from the above step into a simple NoSQL database im
 ## Results:
 Raw Image (Directly from the sensor):
 
-<img src = "https://github.com/Naimish240/WebCam-Cosmic-Rays/blob/main/images/raw_frame/1624906781.0087495.png" width=250>
+<img src = "https://github.com/Naimish240/WebCam-Cosmic-Rays/blob/main/images/raw_frame/1624906781.0087495.png" height=400>
 
 ## To Do:
 - Add Bounding Box around each island.
