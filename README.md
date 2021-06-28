@@ -19,7 +19,7 @@ Check your webcam's id to ensure the correct input device is being read. You mig
 - 2 x Sunfeast Dark Fantasy Boxes
 - 1 x Logitech C110 640x480 USB Webcam
 - Tape
-- 
+
 ***Ensure the webcam is in complete darkness, and seal all holes light can leak through from with tape.***
 
 <img src = "https://github.com/Naimish240/WebCam-Cosmic-Rays/blob/main/Assets/1.jpg" width=250>
@@ -42,6 +42,11 @@ The image from the previous step is converted into a simple black and white imag
 
 ### Step 3 : Saving to DB
 We store each positive frame from the above step into a simple NoSQL database implemented with TinyDB.
+
+## Results:
+Raw Image (Directly from the sensor):
+
+<img src = "https://github.com/Naimish240/WebCam-Cosmic-Rays/blob/main/images/raw_frame/1624906781.0087495.png" width=250>
 
 ## To Do:
 - Add Bounding Box around each island.
