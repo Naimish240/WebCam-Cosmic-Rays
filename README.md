@@ -3,9 +3,13 @@ Using webcams to detect cosmic rays.
 
 ## Usage:
 Step 1 : Create a virtual environment with `python3 -m venv env`, and activate it with `. env/bin/activate` (Linux)
+
 Step 2 : Install requirements in the virtual environment with `pip install -r requirements.txt`
+
 Step 3: Run `python3 start.py` from the command line to start.
+
 Step 4 : Input time (in seconds) to calibrate the setup.
+
 Step 5 : Input time (in seconds) to take observations.
 
 ## Basic Troubleshooting:
@@ -15,6 +19,7 @@ Check your webcam's id to ensure the correct input device is being read. You mig
 - 2 x Sunfeast Dark Fantasy Boxes
 - 1 x Logitech C110 640x480 USB Webcam
 - Tape
+- 
 ***Ensure the webcam is in complete darkness, and seal all holes light can leak through from with tape.***
 
 <img src = "https://github.com/Naimish240/WebCam-Cosmic-Rays/blob/main/Assets/1.jpg" width=250>
@@ -33,7 +38,7 @@ Most digital cameras these days make use of CMOS sensors to take images. Being d
 The average noise in the image is obtained in the form of a "calibration frame", and we subtract its value from each and every image. Next, we set a threshold value. All pixels with a brightness greater than this threshold are then considered for the next step.
 
 ### Step 2 : Island Identification
-The image from the previous step is converted into a simple black and white image, with each pixel having a value of either "0" or "1", depending on whether the sensor was activated at that pixel or not. Then, we find all "islands" and their corresponding sizes (LeetCode problem attached in References). If the image has islands with size greater than 1 pixel (to avoid random hot pixels)  then move forward to the next step.
+The image from the previous step is converted into a simple black and white image, with each pixel having a value of either "0" or "1", depending on whether the sensor was activated at that pixel or not. Then, we find all "islands" and their corresponding sizes (LeetCode problem attached in References). If the image has islands with size greater than 5 pixels (to avoid random hot pixels)  then move forward to the next step.
 
 ### Step 3 : Saving to DB
 We store each positive frame from the above step into a simple NoSQL database implemented with TinyDB.
