@@ -12,6 +12,8 @@ Step 4 : Input time (in seconds) to calibrate the setup.
 
 Step 5 : Input time (in seconds) to take observations.
 
+Step 6 : Input threshold (in px brightness, from 0-255) to act as a high-pass filter.
+
 ## Basic Troubleshooting:
 Check your webcam's id to ensure the correct input device is being read. You might have to change the `cv2.VideoCapture(2)` line in the `calibration.py`, `run.py` and `testImageCapture.py` scripts.
 
