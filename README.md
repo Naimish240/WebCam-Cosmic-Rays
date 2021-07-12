@@ -1,6 +1,8 @@
 # WebCam-Cosmic-Rays
 Using webcams to detect cosmic rays.
 
+Read [the report](https://github.com/Naimish240/WebCam-Cosmic-Rays/blob/main/CosmicRayDetection.pdf) to learn more about this project.
+
 ## Usage:
 Step 1 : Create a virtual environment with `python3 -m venv env`, and activate it with `. env/bin/activate` (Linux)
 
